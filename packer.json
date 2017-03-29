@@ -1,5 +1,6 @@
 {
   "variables": {
+    "aws_region": "us-west-2",
     "base_ami": "ami-fde96b9d",
     "vpc_id": "{{ env `VPC_ID` }}",
     "subnet_id": "{{ env `SUBNET_ID` }}"
@@ -34,8 +35,8 @@
       "curl --retry 3 https://bootstrap.pypa.io/get-pip.py | sudo python",
       "sudo pip install credstash",
       "printf \"\n  -----\n  Install DUO (login_duo)\n  -----\n\n\"",
-      "sudo apt-get install -y build-essential libssl-dev",
-      "cd /tmp && wget https://dl.duosecurity.com/duo_unix-latest.tar.gz",
+      "sudo mkdir -p /tmp/src && cd /tmp/src",
+      "wget https://dl.duosecurity.com/duo_unix-latest.tar.gz",
       "mkdir duo_unix && tar -xzf duo_unix-latest.tar.gz -C duo_unix --strip-components 1",
       "cd duo_unix && ./configure --prefix=/usr && make && sudo make install",
       "sudo bash -c 'printf \"\\n\\n# Enable Duo TFA\\n#ForceCommand /usr/sbin/login_duo\" >> /etc/ssh/sshd_config'",
